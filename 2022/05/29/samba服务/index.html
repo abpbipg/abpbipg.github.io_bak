@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Samba服务 | Home</title><meta name="keywords" content="Linux"><meta name="author" content="躺平的Halo"><meta name="copyright" content="躺平的Halo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="主要配置文件：			&#x2F;etc&#x2F;samba&#x2F;smb.conf配置：[global]    # 全局配置        workgroup &#x3D; SAMBA    # 工作组的名称，注意主机群要相同。        security &#x3D; user    # 定义（安全级别）数据共享方式（user、share、server、domain）	        					#user:使用SAMBA本身的密码数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Samba服务">
+<meta property="og:url" content="http://www.shut.ga/2022/05/29/samba%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="主要配置文件：			&#x2F;etc&#x2F;samba&#x2F;smb.conf配置：[global]    # 全局配置        workgroup &#x3D; SAMBA    # 工作组的名称，注意主机群要相同。        security &#x3D; user    # 定义（安全级别）数据共享方式（user、share、server、domain）	        					#user:使用SAMBA本身的密码数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/22.webp">
+<meta property="article:published_time" content="2022-05-29T11:25:10.000Z">
+<meta property="article:modified_time" content="2022-10-05T11:42:04.658Z">
+<meta property="article:author" content="躺平的Halo">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/22.webp"><link rel="shortcut icon" href="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp"><link rel="canonical" href="http://www.shut.ga/2022/05/29/samba%E6%9C%8D%E5%8A%A1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Samba服务',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2022-10-05 19:42:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/22.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Home</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Samba服务</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-05-29T11:25:10.000Z" title="发表于 2022-05-29 19:25:10">2022-05-29</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">主要配置文件：</span><br><span class="line">			/etc/samba/smb.conf</span><br><span class="line">配置：</span><br><span class="line">[global]    <span class="comment"># 全局配置</span></span><br><span class="line">        workgroup = SAMBA    <span class="comment"># 工作组的名称，注意主机群要相同。</span></span><br><span class="line">        security = user    <span class="comment"># 定义（安全级别）数据共享方式（user、share、server、domain）	</span></span><br><span class="line">        					<span class="comment">#user:使用SAMBA本身的密码数据库，密码数据库和下面的smb passwd file有关</span></span><br><span class="line">        					<span class="comment">#share:分享的数据不需要密码即可分享</span></span><br><span class="line">        					<span class="comment">#Server和domain：使用外部主机的密码，SAMBA是客户端之意</span></span><br><span class="line"><span class="comment">#        					如果设置这个项目，还要提供password Server=IP的设置值</span></span><br><span class="line">        printing = cups</span><br><span class="line">        printcap name = cups</span><br><span class="line">        cups options = raw		  <span class="comment"># 设置打印机使用的方式</span></span><br><span class="line">        netbios name = zkserver   <span class="comment">#用于在 Windows 网上邻居上显示的主机名，跟hostname不是一个概念</span></span><br><span class="line"><span class="comment">#        						   在同一个组中，netbios name必须唯一</span></span><br><span class="line">        serverstring = <span class="built_in">test</span> 	  <span class="comment">#查看共享时的提示符，内容无关紧要</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#与登录文件有关的设置</span></span><br><span class="line">        <span class="built_in">log</span> file = /var/log/samba/log.%m    <span class="comment">#日志文件的存储文件名，每个访问的主机会产生独立的日志文件，</span></span><br><span class="line"><span class="comment">#        									 %m代表的是client端Internet主机名，就是hostname</span></span><br><span class="line">        max <span class="built_in">log</span> size = 50   				<span class="comment">#日志文件最大的大小为50Kb</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#与密码相关的设置</span></span><br><span class="line">        security = share       <span class="comment">#表示不需要密码，可设置的值为share、user和server</span></span><br><span class="line">        passdb backend = tdbsam		<span class="comment">#passdb backend就是用户后台的意思。</span></span><br><span class="line"><span class="comment">#									目前有三种后台：smbpasswd、tdbsam和ldapsam。</span></span><br><span class="line"><span class="comment">#        							Samba 用户的存储方式，smbpasswd 表示明文存储，tdbsam 表示密文存储</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#打印机加载方式</span></span><br><span class="line">        load printer = no <span class="comment">#不加载打印机</span></span><br><span class="line">        load printers = <span class="built_in">yes</span>  <span class="comment">#加载打印机（默认）</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        hosts allow = 127. 192.168.12. 192.168.13. EXCEPT 192.168.13.13       </span><br><span class="line">        <span class="comment"># 指定允许访问 samba 服务器的主机 </span></span><br><span class="line">        deadtime = 10         		<span class="comment"># 客户端在10分钟内没有打开任何 Samba 资源，服务器将自动关闭会话</span></span><br><span class="line">        display charset = UTF8      <span class="comment"># 设置显示的字符集</span></span><br><span class="line">        max connections = 0         <span class="comment"># 设置最大连接数，0表示无限制，如果超过最大连接数则拒绝连接</span></span><br><span class="line">        </span><br><span class="line">        guest account = nobody      <span class="comment"># 设置匿名账户为nobody</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">[homes]</span><br><span class="line">        comment = Home Directories</span><br><span class="line">        valid <span class="built_in">users</span> = %S, %D%w%S</span><br><span class="line">        browseable = No</span><br><span class="line">        <span class="built_in">read</span> only = No</span><br><span class="line">        inherit acls = Yes</span><br><span class="line"></span><br><span class="line">[printers]</span><br><span class="line">        comment = All Printers</span><br><span class="line">        path = /var/tmp    				<span class="comment"># 共享目录</span></span><br><span class="line">        printable = Yes</span><br><span class="line">        create mask = 0600</span><br><span class="line">        browseable = <span class="built_in">yes</span>				<span class="comment">#可以被所有用户浏览到资源名称</span></span><br><span class="line"></span><br><span class="line">[<span class="built_in">print</span>$]	<span class="comment">#[分享目录]</span></span><br><span class="line">        comment = Printer Drivers		<span class="comment">#这个目录的说明</span></span><br><span class="line">        path = /var/lib/samba/drivers	<span class="comment">#实际的共享目录</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#[文件访问权限]</span></span><br><span class="line">        <span class="built_in">read</span> only = <span class="built_in">yes</span>					<span class="comment">#是否允许只读</span></span><br><span class="line">        public	= <span class="built_in">yes</span>					<span class="comment">#设置是否让所有可以登录的用户看到这个项目</span></span><br><span class="line">        writable	= <span class="built_in">yes</span>				<span class="comment">#设置是否可以写入</span></span><br><span class="line">        guest ok  = <span class="built_in">yes</span>					<span class="comment">#可以让用户随意登录</span></span><br><span class="line">        available = <span class="built_in">yes</span>/no				<span class="comment">#available用来指定该共享资源是否可用</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#[用户访问的权限]</span></span><br><span class="line">        admin <span class="built_in">users</span> = 该共享的管理者		<span class="comment">#用来指定该共享的管理员（对该共享具有完全控制权限）。</span></span><br><span class="line">        				<span class="comment">#			在samba 3.0中，如果用户验证方式设置成“security=share”时，此项无效。</span></span><br><span class="line">        valid <span class="built_in">users</span> =用户  		  <span class="comment">#用来指定允许访问该共享资源的用户</span></span><br><span class="line">        invalid <span class="built_in">users</span> = 用户 		  <span class="comment">#用来指定不允许访问该共享资源的用户</span></span><br><span class="line">        write <span class="built_in">users</span> = 用户			  <span class="comment">#用来指定可以在该共享下写入文件的用户</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#[用户组访问的权限]</span></span><br><span class="line">        write list = @printadmin root	<span class="comment">#只允许用户printadmin和root可以访问</span></span><br><span class="line">        force group = @printadmin		<span class="comment">#只允许printadmin组访问</span></span><br><span class="line">        create mask = 0664				<span class="comment">#客户端上传文件的默认权限为664</span></span><br><span class="line">        directory mask = 0775			<span class="comment">#客户端创建目录的默认权限为775</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="简化设置：变量"><a href="#简化设置：变量" class="headerlink" title="简化设置：		变量"></a>简化设置：		变量</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[home]</span><br><span class="line">		vaild <span class="built_in">users</span>=%S		<span class="comment">## 因为valid users是允许的登录者，设置%S表示任何可登录的用户都能够登录，%S会自动替换&quot;[]&quot;里的内容</span></span><br><span class="line">		...</span><br><span class="line">		%S:			取代目前的设置项目值，所谓的”设置项目值“就是在”[共享]”里面的内容。</span><br><span class="line">		%m:			代表Client端的NetBIOS主机名称</span><br><span class="line">		%M:			代表Client端的Internet主机名称，即Host Name.</span><br><span class="line">		%L:			代表SAMBA主机的NetBIOS主机名称</span><br><span class="line">		%H:			代表用户的默认目录。</span><br><span class="line">		%g:			代表登录的用户的群组名称</span><br><span class="line">		%h:			代表目前这台SAMBA主机的Host Name.</span><br><span class="line">		%I:			代表Client的IP</span><br><span class="line">		%T:			代表目前的日期和时间</span><br></pre></td></tr></table></figure>
+
+<h3 id="没用密码的smb-conf设置"><a href="#没用密码的smb-conf设置" class="headerlink" title="没用密码的smb.conf设置"></a>没用密码的smb.conf设置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[temp]</span><br><span class="line">		comment=Test	</span><br><span class="line">		path=/tmp</span><br><span class="line">		<span class="built_in">read</span> only=no</span><br><span class="line">		public=<span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="使用testparm命令来查询语法是否正确"><a href="#使用testparm命令来查询语法是否正确" class="headerlink" title="使用testparm命令来查询语法是否正确"></a>使用<strong>testparm</strong>命令来查询语法是否正确</h5><h3 id="samba的端口有：139-x2F-tcp445-x2F-tcp138-x2F-udp137-x2F-udp"><a href="#samba的端口有：139-x2F-tcp445-x2F-tcp138-x2F-udp137-x2F-udp" class="headerlink" title="samba的端口有：139&#x2F;tcp	445&#x2F;tcp	138&#x2F;udp	137&#x2F;udp"></a>samba的端口有：139&#x2F;tcp	445&#x2F;tcp	138&#x2F;udp	137&#x2F;udp</h3><h5 id="更改端口："><a href="#更改端口：" class="headerlink" title="更改端口："></a>更改端口：</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/samba/smb.conf</span><br><span class="line">		smb ports=139</span><br></pre></td></tr></table></figure>
+
+<h5 id="smbClient"><a href="#smbClient" class="headerlink" title="smbClient"></a>smbClient</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-L  仅查询后面接的主机所共享的目录资源</span><br><span class="line"></span><br><span class="line">-U	通过后面接的账号来尝试取得该主机的使用资源</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="一些配置："><a href="#一些配置：" class="headerlink" title="一些配置："></a>一些配置：</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public = yes</span><br><span class="line">writable = yes		</span><br><span class="line">		#一起用就是所有账号能够访问对方，但不能够编辑或者删除对方建立的文件</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>在&#x2F;etc&#x2F;samba&#x2F;smb.conf文件中引用子配置文件。在引用子配置文件时有二种方法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1）第一种方法：config file</span><br><span class="line">在[global]标签下加入如下参数(/etc/samba/smb.conf)：</span><br><span class="line">[global]  </span><br><span class="line">			config file= /etc/samba/%U.smb.conf</span><br><span class="line">			</span><br><span class="line">2）第二种方法：include</span><br><span class="line">在[global]标签下加入如下参数(/etc/samba/smb.conf)：</span><br><span class="line">[global]  </span><br><span class="line">			include = /etc/samba/%U.smb.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">config file和include的区别是：</span><br><span class="line"><span class="comment">#	使用config file时，当以kevin的身份访问Samba服务器，只能看到kevin，其他在smb.conf中定义的共享资源都无法看到。</span></span><br><span class="line"><span class="comment">#	使用include时，当以kevin的身份访问Samba服务器，除了可以看到kevin，其他在smb.conf中定义的共享资源也可以看到；</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="security-x3D-share报错"><a href="#security-x3D-share报错" class="headerlink" title="security &#x3D; share报错"></a>security &#x3D; share报错</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">搜索后发现, 目前&quot;**security = share**&quot;参数已被弃用, 取而代之的是</span><br><span class="line"></span><br><span class="line">security = user map to guest = Bad User</span><br><span class="line"></span><br><span class="line">SAMBA4版本同时也弃用&quot;security = server&quot;参数</span><br></pre></td></tr></table></figure>
+
+<h5 id="smbpasswd：Failed-to-find-entry-for-user-user101"><a href="#smbpasswd：Failed-to-find-entry-for-user-user101" class="headerlink" title="smbpasswd：Failed to find entry for user user101."></a>smbpasswd：Failed to find entry for user user101.</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">使用smbpasswd -a user101即可</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/22.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/28/%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7Win/"><img class="prev-cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/29.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">滚动升级Win</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/30/%E6%89%93%E5%8D%B0%E6%9C%BA/"><img class="next-cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/2.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Win打印机</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-05</div><div class="title">CA证书 for Centos8</div></div></a></div><div><a href="/2022/04/09/C8%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" title="C8磁盘管理"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/13.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-09</div><div class="title">C8磁盘管理</div></div></a></div><div><a href="/2022/05/14/Linux%E4%BB%93%E5%BA%93/" title="linux仓库&amp;&amp; RPM"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-14</div><div class="title">linux仓库&amp;&amp; RPM</div></div></a></div><div><a href="/2022/06/13/Keepalived/" title="Keepalived"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-13</div><div class="title">Keepalived</div></div></a></div><div><a href="/2022/05/30/ISCSI-Linux/" title="ISCSI Linux"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/21.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-30</div><div class="title">ISCSI Linux</div></div></a></div><div><a href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/30.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-13</div><div class="title">Linux聚合链路</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">躺平的Halo</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/abpbipg"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my website</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E8%AE%BE%E7%BD%AE%EF%BC%9A%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">简化设置：		变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B2%A1%E7%94%A8%E5%AF%86%E7%A0%81%E7%9A%84smb-conf%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">没用密码的smb.conf设置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8testparm%E5%91%BD%E4%BB%A4%E6%9D%A5%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE"><span class="toc-number">2.0.1.</span> <span class="toc-text">使用testparm命令来查询语法是否正确</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#samba%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%9C%89%EF%BC%9A139-x2F-tcp445-x2F-tcp138-x2F-udp137-x2F-udp"><span class="toc-number">3.</span> <span class="toc-text">samba的端口有：139&#x2F;tcp	445&#x2F;tcp	138&#x2F;udp	137&#x2F;udp</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E7%AB%AF%E5%8F%A3%EF%BC%9A"><span class="toc-number">3.0.1.</span> <span class="toc-text">更改端口：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#smbClient"><span class="toc-number">3.0.2.</span> <span class="toc-text">smbClient</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">3.0.3.</span> <span class="toc-text">一些配置：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#security-x3D-share%E6%8A%A5%E9%94%99"><span class="toc-number">3.0.4.</span> <span class="toc-text">security &#x3D; share报错</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#smbpasswd%EF%BC%9AFailed-to-find-entry-for-user-user101"><span class="toc-number">3.0.5.</span> <span class="toc-text">smbpasswd：Failed to find entry for user user101.</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CA证书 for Centos8"/></a><div class="content"><a class="title" href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8">CA证书 for Centos8</a><time datetime="2022-10-05T11:42:05.986Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/05/NFS/" title="NFS"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/31.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NFS"/></a><div class="content"><a class="title" href="/2022/10/05/NFS/" title="NFS">NFS</a><time datetime="2022-10-05T11:42:05.005Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/13/Keepalived/" title="Keepalived"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Keepalived"/></a><div class="content"><a class="title" href="/2022/06/13/Keepalived/" title="Keepalived">Keepalived</a><time datetime="2022-06-13T12:08:17.000Z" title="发表于 2022-06-13 20:08:17">2022-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/30.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux聚合链路"/></a><div class="content"><a class="title" href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路">Linux聚合链路</a><time datetime="2022-06-13T01:41:06.000Z" title="发表于 2022-06-13 09:41:06">2022-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/03/%E5%90%AC%E6%AD%8C/" title="听歌"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="听歌"/></a><div class="content"><a class="title" href="/2022/06/03/%E5%90%AC%E6%AD%8C/" title="听歌">听歌</a><time datetime="2022-06-03T09:47:40.000Z" title="发表于 2022-06-03 17:47:40">2022-06-03</time></div></div></div></div></div></div></main></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html><footer id="footer" style="background-image: url('https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 躺平的Halo</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer>

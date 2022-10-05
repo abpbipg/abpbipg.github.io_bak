@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>kerberos | Home</title><meta name="keywords" content="Linux"><meta name="author" content="躺平的Halo"><meta name="copyright" content="躺平的Halo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Kerberos 工作原理的基础知识Kerberos 使用对称加密和受信任的第三方（密钥分发中心或 KDC）对一组网络服务的用户进行身份验证，而不是像使用简单的密码身份验证那样单独对每个用户进行身份验证。由该 KDC 管理的计算机和任何辅助 KDC 构成一个领域。 当用户向 KDC 进行身份验证时，KDC 会将一组特定于该会话的凭据（票证）发送回用户的计算机，并且任何支持 Kerberos 的服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kerberos">
+<meta property="og:url" content="http://www.shut.ga/2022/05/30/kerberos/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="Kerberos 工作原理的基础知识Kerberos 使用对称加密和受信任的第三方（密钥分发中心或 KDC）对一组网络服务的用户进行身份验证，而不是像使用简单的密码身份验证那样单独对每个用户进行身份验证。由该 KDC 管理的计算机和任何辅助 KDC 构成一个领域。 当用户向 KDC 进行身份验证时，KDC 会将一组特定于该会话的凭据（票证）发送回用户的计算机，并且任何支持 Kerberos 的服务">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/12.webp">
+<meta property="article:published_time" content="2022-05-30T01:38:51.000Z">
+<meta property="article:modified_time" content="2022-10-05T11:42:05.323Z">
+<meta property="article:author" content="躺平的Halo">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/12.webp"><link rel="shortcut icon" href="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp"><link rel="canonical" href="http://www.shut.ga/2022/05/30/kerberos/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'kerberos',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2022-10-05 19:42:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/12.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Home</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">kerberos</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-05-30T01:38:51.000Z" title="发表于 2022-05-30 09:38:51">2022-05-30</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="Kerberos-工作原理的基础知识"><a href="#Kerberos-工作原理的基础知识" class="headerlink" title="Kerberos 工作原理的基础知识"></a>Kerberos 工作原理的基础知识</h3><p>Kerberos 使用对称加密和受信任的第三方（<em>密钥分发中心</em>或 KDC）对一组网络服务的用户进行身份验证，而不是像使用简单的密码身份验证那样单独对每个用户进行身份验证。由该 KDC 管理的计算机和任何辅助 KDC 构成一个<em>领域</em>。</p>
+<p>当用户向 KDC 进行身份验证时，KDC 会将一组特定于该会话的<strong>凭据</strong>（<em>票证</em>）发送回用户的计算机，并且任何支持 Kerberos 的服务都会在<strong>用户的计算机</strong>上查找票证，而不是要求用户进行身份验证使用密码。</p>
+<p>如图<a target="_blank" rel="noopener" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/Using_Kerberos#fig.kerberos-process">11.1 “Kerberos 身份验证”</a>所示，<strong>每个用户</strong>都被 KDC 识别为具有唯一身份，称为<strong>主体</strong>。当 Kerberos 感知网络上的用户登录到他的工作站时，他的主体将作为来自<strong>身份验证服务器的授权票证</strong>（或 TGT）请求的一部分发送到 KDC 。该请求可以由登录程序发送，对用户透明，也可以<strong>kinit</strong>在用户登录后由用户通过程序手动发送。</p>
+<p>KDC 然后检查其数据库中的<strong>主体</strong>。如果找到<strong>主体</strong>，KDC 会创建一个 TGT，使用用户的密钥对其进行<strong>加密</strong>，然后将 TGT 发送给该用户。</p>
+<p><img src="https://access.redhat.com/webassets/avalon/d/Red_Hat_Enterprise_Linux-7-System-Level_Authentication_Guide-en-US/images/cdb399930e73d56dc025bdeb4d35f745/kerberos.png" alt="Kerberos 身份验证"></p>
+<p><strong>Kerberos 身份验证</strong></p>
+<p>客户端上的登录或<code>kinit</code>程序使用用户密钥解密 TGT，该密钥是根据用户密码计算得出的。</p>
+<p>用户的密钥仅在客户端机器上使用，<strong>不通过网络传输</strong>。KDC 发送的票证（或凭据）存储在本地存储中，即*<strong>凭据缓存</strong> (ccache)*中，可以通过 Kerberos 感知服务进行检查。</p>
+<h3 id="Kerberos单点登录："><a href="#Kerberos单点登录：" class="headerlink" title="Kerberos单点登录："></a>Kerberos单点登录：</h3><p>原理图：</p>
+<p><img src="/2022/05/30/kerberos/1.png" alt="截图"></p>
+<blockquote>
+<p>Kerberos提供了一个集中式的认证服务器结构，认证服务器的功能式实现用户与其访问的服务器间的相互鉴别。（采用的是对称密钥加密技术）</p>
+</blockquote>
+<ul>
+<li>AS：认证服务器AS（authenticator server）</li>
+<li>TGS：票据许可服务器TGS（ticket granting server）</li>
+<li>Client：客户端</li>
+<li>Server：服务器</li>
+</ul>
+<h4 id="Kerberos凭证"><a href="#Kerberos凭证" class="headerlink" title="Kerberos凭证"></a>Kerberos凭证</h4><h5 id="票据（ticket）："><a href="#票据（ticket）：" class="headerlink" title="票据（ticket）："></a>票据（ticket）：</h5><p>ticket用来安全的在认证服务器和用户请求的服务器之间传递用户的身份，同时也传递附加信息。用来保证使用ticket的用户必须是ticket中指定用户。ticket一旦生产，在生存时间指定的时间内可以被client多次使用，并申请同一个server服务。</p>
+<h5 id="鉴别码（authenticator）："><a href="#鉴别码（authenticator）：" class="headerlink" title="鉴别码（authenticator）："></a>鉴别码（authenticator）：</h5><p>提供信息与ticket中的信息进行比较，一起保证发出ticket的用户信息就是ticket中指定的用户。authenticator只能在一次服务请求中使用，每当client向server申请服务时，必须重新生成authenticator</p>
+<h4 id="Kerberos票据："><a href="#Kerberos票据：" class="headerlink" title="Kerberos票据："></a>Kerberos票据：</h4><p>两种票据：</p>
+<h5 id="服务许可票据（server-granting-ticket）："><a href="#服务许可票据（server-granting-ticket）：" class="headerlink" title="服务许可票据（server granting ticket）："></a>服务许可票据（server granting ticket）：</h5><p>是客户端请求服务时需要提供的票据</p>
+<p>用ticket-A表示访问应用服务器X的票据，通过TGS发放</p>
+<h5 id="票据许可票据（ticket-granting-ticket）："><a href="#票据许可票据（ticket-granting-ticket）：" class="headerlink" title="票据许可票据（ticket granting ticket）："></a>票据许可票据（ticket granting ticket）：</h5><p>客户端访问TGS服务器需要提供的票据，目的是为了申请某一个应用服务器（如nfs，ftp，nis，pcs等）的“服务许可票据”</p>
+<p>票据由AS发放 用ticket-B表示访问TGS服务器票据 ticket-B在用户登录时向AS申请一次，可以多次重复使用</p>
+<h4 id="Kerberos域（realm）"><a href="#Kerberos域（realm）" class="headerlink" title="Kerberos域（realm）"></a>Kerberos域（realm）</h4><p>构成：一个完整的Kerberos环境包含一个Kerberos服务器，一组工作站和一组应用服务器</p>
+<p>Kerberos服务器数据库中拥有所有参与用户的UID和口令列表</p>
+<p>Kerberos服务器必须与每一个服务器之间共享一个保密密钥（keytab文件）</p>
+<p>所有用户均在Kerberos服务器上注册</p>
+<p>所有服务器均在Kerberos服务器上注册</p>
+<p>领域划分是根据网络的管理边界来划分（网段）</p>
+<h4 id="服务端配置kerberos-NFS"><a href="#服务端配置kerberos-NFS" class="headerlink" title="服务端配置	kerberos+NFS"></a>服务端配置	kerberos+NFS</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装时间同步 kdc服务端 nfs服务端 </span></span><br><span class="line">yum install krb5-server krb5-libs nfs-utils -y</span><br><span class="line"><span class="comment">#设置hosts</span></span><br><span class="line">10.10.70.101 kdc.skills.com</span><br><span class="line">10.10.70.102 client.skills.com</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改kdc配置文件</span></span><br><span class="line"><span class="comment">#/etc/krb5.conf</span></span><br><span class="line"><span class="comment"># To opt out of the system crypto-policies configuration of krb5, remove the</span></span><br><span class="line"><span class="comment"># symlink at /etc/krb5.conf.d/crypto-policies which will not be recreated.</span></span><br><span class="line">includedir /etc/krb5.conf.d/</span><br><span class="line"></span><br><span class="line">[logging]</span><br><span class="line">    default = FILE:/var/log/krb5libs.<span class="built_in">log</span></span><br><span class="line">    kdc = FILE:/var/log/krb5kdc.<span class="built_in">log</span></span><br><span class="line">    admin_server = FILE:/var/log/kadmind.log</span><br><span class="line"></span><br><span class="line">[libdefaults]</span><br><span class="line">    dns_lookup_realm = <span class="literal">false</span></span><br><span class="line">    ticket_lifetime = 24h</span><br><span class="line">    renew_lifetime = 7d</span><br><span class="line">    forwardable = <span class="literal">true</span></span><br><span class="line">    rdns = <span class="literal">false</span></span><br><span class="line">    default_realm = SKILLS.COM</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line"> SKILLS.COM = &#123;</span><br><span class="line">     kdc = kdc.skills.com</span><br><span class="line">     admin_server = kdc.skills.com</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">[domain_realm]</span><br><span class="line"> .skills.com = SKILLS.COM</span><br><span class="line"> skills.com = SKILLS.COM</span><br><span class="line"></span><br><span class="line"><span class="comment">#/var/kerberos/krb5kdc</span></span><br><span class="line"><span class="comment"># kadm5.acl</span></span><br><span class="line">*/admin@SKILLS.COM      *</span><br><span class="line"><span class="comment"># kdc.conf</span></span><br><span class="line">[kdcdefaults]</span><br><span class="line">    kdc_ports = 88</span><br><span class="line">    kdc_tcp_ports = 88</span><br><span class="line">    spake_preauth_kdc_challenge = edwards25519</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line">SKILLS.COM = &#123;</span><br><span class="line">     <span class="comment">#master_key_type = aes256-cts</span></span><br><span class="line">     acl_file = /var/kerberos/krb5kdc/kadm5.acl</span><br><span class="line">     dict_file = /usr/share/dict/words</span><br><span class="line">     admin_keytab = /var/kerberos/krb5kdc/kadm5.keytab</span><br><span class="line">     supported_enctypes = aes256-cts:normal aes128-cts:normal arcfour-hmac:normal camellia256-cts:normal camellia128-cts:normal</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#初始化kdc数据库</span></span><br><span class="line">kdb5_util create -s</span><br><span class="line"></span><br><span class="line"><span class="comment">#进入kdc数据库</span></span><br><span class="line">kadmin.local </span><br><span class="line">Authenticating as principal nfs/admin@SKILLS.COM with password.</span><br><span class="line"><span class="comment">#创建kdc本机凭据</span></span><br><span class="line">kadmin.local:  addprinc -randkey nfs/kdc.skills.com</span><br><span class="line"><span class="comment">#创建客户端凭据</span></span><br><span class="line">kadmin.local:  addprinc -randkey nfs/client.skills.com</span><br><span class="line"><span class="comment">#导出凭据</span></span><br><span class="line"><span class="comment">#第一个直导出到本地</span></span><br><span class="line">ktadd -kt /etc/krb5.keytab nfs/kdc.skills.com</span><br><span class="line"><span class="comment">#第二个先导出到本地tmp下，再导出到另一台服务器</span></span><br><span class="line">ktadd -kt /tmp/client nfs/client.skills.com</span><br><span class="line"><span class="comment">#把客户端凭据传给客户端</span></span><br><span class="line">scp /tmp/client client.skills.com:/etc/krb5.keytab</span><br><span class="line"><span class="comment">#把kdc主配置文件传送给客户端</span></span><br><span class="line">scp /etc/krb5.conf client.skills.com:/etc/krb5.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置nfs /etc/exports</span></span><br><span class="line">/mnt *(rw,sec=krb5p)</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改hosts文件</span></span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">10.10.70.101 kdc.skills.com</span><br><span class="line">10.10.70.102 client.skills.com</span><br><span class="line"></span><br><span class="line"><span class="comment">#把hosts穿给客户端服务器</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#把 kadmin.service krb5kdc.service nfs-server.service 服务启动</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#安装凭据</span></span><br><span class="line">kinit -kt /etc/krb5.keytab </span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端配置："><a href="#客户端配置：" class="headerlink" title="客户端配置："></a>客户端配置：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#配置/etc/chrony.conf</span></span><br><span class="line">server 10.10.70.101 iburst</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装kdc工作站 nfs </span></span><br><span class="line">yum install krb5-workstation.x86_64  krb5-libs nfs-utils -y</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装凭据</span></span><br><span class="line">kinit -kt /etc/krb5.keytab </span><br><span class="line"></span><br><span class="line"><span class="comment">#挂载</span></span><br><span class="line">mount kdc.skills.com:/mnt /mnt</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看挂载</span></span><br><span class="line">mount | grep krb5p</span><br><span class="line">kdc.skills.com:/mnt on /mnt <span class="built_in">type</span> nfs4 (rw,relatime,vers=4.2,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=krb5p,clientaddr=10.10.70.102,local_lock=none,addr=10.10.70.101)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>kerberos nfs 挂载不上的原因有</p>
+</blockquote>
+<ol>
+<li><p>使用IP和域名简写挂载</p>
+<p>例如主机名为 client1.skills.com ip地址为 10.10.70.102 的实例，挂载时用的是client1或是 10.10.70.102 进行挂载，结果导致挂载失败，没有用主机的完全域名就无法进行挂载。</p>
+</li>
+</ol>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/12.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/30/%E6%89%93%E5%8D%B0%E6%9C%BA/"><img class="prev-cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/2.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Win打印机</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/30/NIS/"><img class="next-cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/36.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">NIS</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-05</div><div class="title">CA证书 for Centos8</div></div></a></div><div><a href="/2022/04/09/C8%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" title="C8磁盘管理"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/13.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-09</div><div class="title">C8磁盘管理</div></div></a></div><div><a href="/2022/05/14/Linux%E4%BB%93%E5%BA%93/" title="linux仓库&amp;&amp; RPM"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-14</div><div class="title">linux仓库&amp;&amp; RPM</div></div></a></div><div><a href="/2022/06/13/Keepalived/" title="Keepalived"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-13</div><div class="title">Keepalived</div></div></a></div><div><a href="/2022/05/30/ISCSI-Linux/" title="ISCSI Linux"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/21.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-30</div><div class="title">ISCSI Linux</div></div></a></div><div><a href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/30.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-13</div><div class="title">Linux聚合链路</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">躺平的Halo</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/abpbipg"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my website</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kerberos-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">Kerberos 工作原理的基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kerberos%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">Kerberos单点登录：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Kerberos%E5%87%AD%E8%AF%81"><span class="toc-number">2.1.</span> <span class="toc-text">Kerberos凭证</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A5%A8%E6%8D%AE%EF%BC%88ticket%EF%BC%89%EF%BC%9A"><span class="toc-number">2.1.1.</span> <span class="toc-text">票据（ticket）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%89%B4%E5%88%AB%E7%A0%81%EF%BC%88authenticator%EF%BC%89%EF%BC%9A"><span class="toc-number">2.1.2.</span> <span class="toc-text">鉴别码（authenticator）：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Kerberos%E7%A5%A8%E6%8D%AE%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">Kerberos票据：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E8%AE%B8%E5%8F%AF%E7%A5%A8%E6%8D%AE%EF%BC%88server-granting-ticket%EF%BC%89%EF%BC%9A"><span class="toc-number">2.2.1.</span> <span class="toc-text">服务许可票据（server granting ticket）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A5%A8%E6%8D%AE%E8%AE%B8%E5%8F%AF%E7%A5%A8%E6%8D%AE%EF%BC%88ticket-granting-ticket%EF%BC%89%EF%BC%9A"><span class="toc-number">2.2.2.</span> <span class="toc-text">票据许可票据（ticket granting ticket）：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Kerberos%E5%9F%9F%EF%BC%88realm%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">Kerberos域（realm）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AEkerberos-NFS"><span class="toc-number">2.4.</span> <span class="toc-text">服务端配置	kerberos+NFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">2.5.</span> <span class="toc-text">客户端配置：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CA证书 for Centos8"/></a><div class="content"><a class="title" href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8">CA证书 for Centos8</a><time datetime="2022-10-05T11:42:05.986Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/05/NFS/" title="NFS"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/31.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NFS"/></a><div class="content"><a class="title" href="/2022/10/05/NFS/" title="NFS">NFS</a><time datetime="2022-10-05T11:42:05.005Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/13/Keepalived/" title="Keepalived"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Keepalived"/></a><div class="content"><a class="title" href="/2022/06/13/Keepalived/" title="Keepalived">Keepalived</a><time datetime="2022-06-13T12:08:17.000Z" title="发表于 2022-06-13 20:08:17">2022-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/30.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux聚合链路"/></a><div class="content"><a class="title" href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路">Linux聚合链路</a><time datetime="2022-06-13T01:41:06.000Z" title="发表于 2022-06-13 09:41:06">2022-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/03/%E5%90%AC%E6%AD%8C/" title="听歌"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="听歌"/></a><div class="content"><a class="title" href="/2022/06/03/%E5%90%AC%E6%AD%8C/" title="听歌">听歌</a><time datetime="2022-06-03T09:47:40.000Z" title="发表于 2022-06-03 17:47:40">2022-06-03</time></div></div></div></div></div></div></main></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html><footer id="footer" style="background-image: url('https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 躺平的Halo</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer>

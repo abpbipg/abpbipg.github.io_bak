@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>mariadb数据库 | Home</title><meta name="keywords" content="Linux"><meta name="author" content="躺平的Halo"><meta name="copyright" content="躺平的Halo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="配置 MySQL 服务器yum -y install mysql-server  配置 root 密码mysqladmin -u root -p password Aa1        &#x2F;&#x2F; 设置 root 密码&gt; Enter password :                        &#x2F;&#x2F; 输入旧密码，5.5 默认为空  登陆 MySQL 命令行mysql -uroot -pAa1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mariadb数据库">
+<meta property="og:url" content="http://www.shut.ga/2022/05/31/mariadb%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="配置 MySQL 服务器yum -y install mysql-server  配置 root 密码mysqladmin -u root -p password Aa1        &#x2F;&#x2F; 设置 root 密码&gt; Enter password :                        &#x2F;&#x2F; 输入旧密码，5.5 默认为空  登陆 MySQL 命令行mysql -uroot -pAa1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/3.webp">
+<meta property="article:published_time" content="2022-05-31T06:46:18.000Z">
+<meta property="article:modified_time" content="2022-10-05T11:42:04.875Z">
+<meta property="article:author" content="躺平的Halo">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/3.webp"><link rel="shortcut icon" href="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp"><link rel="canonical" href="http://www.shut.ga/2022/05/31/mariadb%E6%95%B0%E6%8D%AE%E5%BA%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'mariadb数据库',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2022-10-05 19:42:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/3.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Home</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">mariadb数据库</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-05-31T06:46:18.000Z" title="发表于 2022-05-31 14:46:18">2022-05-31</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="配置-MySQL-服务器"><a href="#配置-MySQL-服务器" class="headerlink" title="配置 MySQL 服务器"></a><strong>配置 MySQL 服务器</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum -y install mysql-server</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-root-密码"><a href="#配置-root-密码" class="headerlink" title="配置 root 密码"></a>配置 root 密码</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqladmin -u root -p password Aa1        // 设置 root 密码</span><br><span class="line">&gt; Enter password :                        // 输入旧密码，5.5 默认为空</span><br></pre></td></tr></table></figure>
+
+<h3 id="登陆-MySQL-命令行"><a href="#登陆-MySQL-命令行" class="headerlink" title="登陆 MySQL 命令行"></a>登陆 MySQL 命令行</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -uroot -pAa1                        // 参数 跟 用户名，密码 之间无空格</span><br></pre></td></tr></table></figure>
+
+<h3 id="命令行-导入-x2F-导出-数据库"><a href="#命令行-导入-x2F-导出-数据库" class="headerlink" title="命令行 导入&#x2F;导出 数据库"></a>命令行 导入&#x2F;导出 数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqldump -uroot -p 数据库名 &gt; /文件路径    // 导出 数据库 到 玩家</span><br><span class="line">mysql -uroot -p 数据库名 &lt; /路径/文件名.sql // 从 文件 导入 数据库</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL-5-6-查看-初始密码"><a href="#MySQL-5-6-查看-初始密码" class="headerlink" title="MySQL 5.6 查看 初始密码"></a>MySQL 5.6 查看 初始密码</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.mysql_secret</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="Tips：-从-MySQL-5-6-起，初始密码不再为空"><a href="#Tips：-从-MySQL-5-6-起，初始密码不再为空" class="headerlink" title="Tips： 从 MySQL 5.6 起，初始密码不再为空"></a>Tips： 从 MySQL 5.6 起，初始密码不再为空</h4></li>
+</ul>
+<h3 id="MySQL-常用语句"><a href="#MySQL-常用语句" class="headerlink" title="MySQL 常用语句"></a><strong>MySQL 常用语句</strong></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. create database dbname;                // 创建 dbname 数据库</span><br><span class="line">2. create database dbname default charset utf8 collate utf8_general_ci;</span><br><span class="line">3.                                        // 创建数据库 并 指定默认编码</span><br><span class="line">4. 　</span><br><span class="line">5. use dbname;                            // 使用 dbname 数据库</span><br><span class="line">6. 　</span><br><span class="line">7. create table <span class="built_in">test</span> (                    // 创建 <span class="built_in">test</span> 表</span><br><span class="line">8. ID int NOT NULL AUTO_INCREMENT,      // ID，int 类型，不能为空，自动增值</span><br><span class="line">9. Name varchar(10),                    // Name，varchar 类型，长度 10 位</span><br><span class="line">10. birthday datetime,                   // birthd，日期类型</span><br><span class="line">11. sex char(5),                         // sex，char 类型，长度 5 位</span><br><span class="line">12. Password char(200),                  // Password，char 类型，长度 200 位</span><br><span class="line">13. PRIMARY KEY (ID)                       // 设置 ID 为主键</span><br><span class="line">14. );                                     // 完成创建语句</span><br><span class="line">15. 　</span><br><span class="line">16. show databases;                        // 列出所有数据库</span><br><span class="line">17. show tables;                           // 列出数据库所有表</span><br><span class="line">18. select * from 表名;                    // 列出表所有内容</span><br><span class="line">19. desc 表名;                             // 显示数据表结构</span><br><span class="line">20. drop database 库名;                    // 删除数据库</span><br><span class="line">21. drop table 表名;                       // 删除数据表</span><br><span class="line">22. delete from 表名;                      // 清除表内所有数据</span><br><span class="line">23. 　</span><br><span class="line">24. <span class="built_in">source</span> /路径/文件名.sql                // 从文件读取 数据库语句 并执行</span><br><span class="line">25. 　</span><br><span class="line">26. </span><br><span class="line">27. insert into 表名(Name,birthday,sex,Password) values(<span class="string">&#x27;myuser1&#x27;</span>,<span class="string">&#x27;1995-07-01&#x27;</span>,<span class="string">&#x27;男&#x27;</span>,<span class="string">&#x27;myuser1&#x27;</span>));</span><br><span class="line">28.                                        // 往 数据表 插入内容</span><br><span class="line">29. 　</span><br><span class="line">30. update 表名 <span class="built_in">set</span> birthday=<span class="string">&#x27;1996-10-25&#x27;</span> <span class="built_in">where</span> Name=<span class="string">&#x27;myuser2&#x27;</span>;</span><br><span class="line">31.                                        // 更新 数据表 内容</span><br><span class="line">32. update 表名 <span class="built_in">set</span> Password=password(<span class="string">&#x27;密码&#x27;</span>) <span class="built_in">where</span> Name=<span class="string">&#x27;myuser1&#x27;</span>;</span><br><span class="line">33.                                        // 利用 MySQL 自带函数 生成密文</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL-常用操作语句"><a href="#MySQL-常用操作语句" class="headerlink" title="MySQL 常用操作语句"></a><strong>MySQL 常用操作语句</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. # 查找 所有用户 及 登录地址</span><br><span class="line">2. select user,host from mysql.user;</span><br><span class="line">3. 　</span><br><span class="line">4. # 删除匿名用户</span><br><span class="line">5. delete from mysql.user where user=&#x27;&#x27;;</span><br><span class="line">6. 　</span><br><span class="line">7. # 改变 root 用户名</span><br><span class="line">8. update mysql.user set user=&#x27;admin&#x27; where user=&#x27;root&#x27;;</span><br><span class="line">9. 　</span><br><span class="line">10. # 创建用户</span><br><span class="line">11. create user &#x27;username&#x27;@&#x27;localhost&#x27; identified by &#x27;password&#x27;;</span><br><span class="line">12. 　</span><br><span class="line">13. # 更改密码</span><br><span class="line">14. set password for &#x27;root&#x27;@&#x27;localhost&#x27;=password(&#x27;passwd&#x27;);</span><br><span class="line">15. 　</span><br><span class="line">16. # 删除用户</span><br><span class="line">17. drop user username;</span><br><span class="line">18. 　</span><br><span class="line">19. # 赋予权限</span><br><span class="line">20. grant all on *.* to username@localhost;    // 允许 本地登陆 的 username 用户 完全控制 所有数据库</span><br><span class="line">21. grant select on testdb.* to username@localhost;</span><br><span class="line">22.                                            // 允许 本地登陆 的 username 用户 完全控制 testdb 数据库</span><br><span class="line">23. 　</span><br><span class="line">24. # 回收权限</span><br><span class="line">25. revoke all on *.* from username@localhost; // 移除 本地登陆 的 username 用户 的 所有权限</span><br><span class="line">26. 　</span><br><span class="line">27. # 刷新权限</span><br><span class="line">28. flush privileges;                          // 修改完权限 后 刷新生效</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL-重置-root-密码"><a href="#MySQL-重置-root-密码" class="headerlink" title="MySQL 重置 root 密码"></a><strong>MySQL 重置 root 密码</strong></h3><ol>
+<li><p>修改 MySQL 配置文件 vim &#x2F;etc&#x2F;my.cnf</p>
+</li>
+<li><p>在 [mysqld] 下添加 skip-grant-tables</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[mysqld]skip-grant-tables</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启 MySQL 服务 service mysqld restart</p>
+</li>
+<li><p>免密码 登陆 MySQL mysql -uroot</p>
+</li>
+<li><p>修改 root 用户密码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set password for &#x27;root&#x27;@&#x27;localhost&#x27;=password(&#x27;passwd&#x27;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件移除 skip-grant-tables，重启 MySQL，完成</p>
+</li>
+</ol>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><h4 id="查看-MySQL-版本"><a href="#查看-MySQL-版本" class="headerlink" title="查看 MySQL 版本"></a>查看 MySQL 版本</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -V</span><br><span class="line">从 RPM 包 升级 MySQL</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mnt/smb_share                      // 从共享拖入 rpm 包rpm -ivh --nodeps --force mysqld-*     </span><br><span class="line">					<span class="comment">#					// 忽略依赖检查和冲突，强行安装</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="mysqld-相关"><a href="#mysqld-相关" class="headerlink" title="[mysqld] 相关"></a><strong>[mysqld] 相关</strong></h4><h4 id="vim-x2F-etc-x2F-my-cnf-修改-MySQL-配置文件"><a href="#vim-x2F-etc-x2F-my-cnf-修改-MySQL-配置文件" class="headerlink" title="vim &#x2F;etc&#x2F;my.cnf 修改 MySQL 配置文件"></a>vim &#x2F;etc&#x2F;my.cnf 修改 MySQL 配置文件</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[mysqld]　</span><br><span class="line">skip-networking                           // 关闭外部访问</span><br><span class="line">local-infile=0                            // 禁止读取本地文件</span><br><span class="line">wait_timeout=100                          // 非交互式链接 超时等待 秒数</span><br><span class="line">interactive_timeout=100                   // 交互式链接 超时等待 秒数</span><br><span class="line">log=/usr/local/mysql/log/mysql.log        // 启用日志记录</span><br></pre></td></tr></table></figure>
+
+<h4 id="Tips：-修改-x2F-etc-x2F-my-cnf-后需要-重启服务-才能-生效配置"><a href="#Tips：-修改-x2F-etc-x2F-my-cnf-后需要-重启服务-才能-生效配置" class="headerlink" title="* Tips： 修改 &#x2F;etc&#x2F;my.cnf 后需要 重启服务 才能 生效配置"></a>* Tips： 修改 &#x2F;etc&#x2F;my.cnf 后需要 重启服务 才能 生效配置</h4><h3 id="重启"><a href="#重启" class="headerlink" title="重启"></a><strong>重启</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl restart mariadb 重启 MySQL 服务</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a><strong>端口</strong></h3><h4 id="防火墙开放端口"><a href="#防火墙开放端口" class="headerlink" title="防火墙开放端口"></a>防火墙开放端口</h4><ul>
+<li><h4 id="TCP-x2F-3306-MySQL-默认端口"><a href="#TCP-x2F-3306-MySQL-默认端口" class="headerlink" title="TCP&#x2F;3306 - MySQL 默认端口"></a>TCP&#x2F;3306 - MySQL 默认端口</h4></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql_secure_installation     初始化数据表，填写root进入密码</span><br><span class="line"></span><br><span class="line">mysql -uroot -p                       以root密码进入</span><br><span class="line"></span><br><span class="line">show databases;                    列出全部数据库</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> password = password(<span class="string">&quot;new password&quot;</span>);        为root重设数据库密码</span><br><span class="line"></span><br><span class="line">creat user  [user@loaclhost](user@whl.com)  identified by <span class="string">&#x27;密码&#x27;</span>         创建用户以及密码</span><br><span class="line"></span><br><span class="line">use mysql                                                                      使用“ ”数据库</span><br><span class="line"></span><br><span class="line">select host,user,password from user <span class="built_in">where</span> user=<span class="string">&quot;name&quot;</span>;       查询账户权限</span><br><span class="line"></span><br><span class="line">grant all privileges on *.* to [user@localhost](user@localhost)                              </span><br><span class="line">为用户user开放全部的数据库和表单的权限</span><br><span class="line"></span><br><span class="line">grant select,update,delete,insert on mysql.user to [user@localhost](user@localhost)       </span><br><span class="line">为用户user开放插入、更新、删除、查询的权限</span><br><span class="line"></span><br><span class="line">revoke select,update,delete,insert on mysql.user from [user@localhost](user@localhost)         </span><br><span class="line">移除用户user的插入、更新、删除、查询的权限</span><br><span class="line"></span><br><span class="line">create database             创建数据库</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">create table name  (</span><br><span class="line"></span><br><span class="line">name char(15),</span><br><span class="line"></span><br><span class="line">price int,</span><br><span class="line"></span><br><span class="line">pages int);</span><br><span class="line"></span><br><span class="line">describe name                       创建表单数据</span><br><span class="line"></span><br><span class="line">insert into name(name,price,pages)  values(<span class="string">&#x27;mary&#x27;</span>,<span class="string">&#x27;80&#x27;</span>,<span class="string">&#x27;788&#x27;</span>);       插入数据</span><br><span class="line"></span><br><span class="line">select * from name;                         **选择name的全部表单内容**</span><br><span class="line"></span><br><span class="line">update name <span class="built_in">set</span> price=<span class="string">&#x27;22&#x27;</span>;                    **修改插入的表单内容**</span><br><span class="line"></span><br><span class="line">delete from name           清空表单内容</span><br><span class="line"></span><br><span class="line">select * from name <span class="built_in">where</span> price&gt;75;          </span><br><span class="line"></span><br><span class="line">select * from name <span class="built_in">where</span> price!=80;     在 name表单查找出价格大于 75 元或价格不等于 80 元的图书</span><br><span class="line"></span><br><span class="line">flush privileges  			刷新</span><br><span class="line"></span><br><span class="line">mysql -h10.10.10.1 -uroot -p123 远程连接数据库</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查看端口号"><a href="#查看端口号" class="headerlink" title="查看端口号"></a><strong>查看端口号</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show global variables like &#x27;port&#x27;;  </span><br></pre></td></tr></table></figure>
+
+<h3 id="远程连接数据库"><a href="#远程连接数据库" class="headerlink" title="远程连接数据库"></a>远程连接数据库</h3><ol>
+<li><h4 id="创建能远程连接的用户，并且设置用户的权限来访问数据"><a href="#创建能远程连接的用户，并且设置用户的权限来访问数据" class="headerlink" title="创建能远程连接的用户，并且设置用户的权限来访问数据"></a>创建能远程连接的用户，并且设置用户的权限来访问数据</h4></li>
+<li><pre><code class="bash">1. grant all privileges on *.* to &#39;jack&#39;@&#39;%&#39; identified by &#39;123&#39; with grant option;
+2. 授权	全部的数据库	给jack用户	全部的电脑	可以连接	使用123的密码连接
+3. flush privileges;		命令立刻生效,刷新
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">3. #### 查询数据库的用户</span><br><span class="line"></span><br><span class="line">4. ```</span><br><span class="line">   select distinct concat(&#x27;User: &#x27;&#x27;&#x27;,user,&#x27;&#x27;&#x27;@&#x27;&#x27;&#x27;,host,&#x27;&#x27;&#x27;;&#x27;) as query from mysql.user;</span><br><span class="line">   ---中间是三个 &#x27; 来组成的</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p><img src="/2022/05/31/mariadb%E6%95%B0%E6%8D%AE%E5%BA%93/1.png" alt="截图"></p>
+</li>
+<li><h4 id="查询出jack用户有对全部计算机连接数据库的权限"><a href="#查询出jack用户有对全部计算机连接数据库的权限" class="headerlink" title="查询出jack用户有对全部计算机连接数据库的权限"></a>查询出jack用户有对全部计算机连接数据库的权限</h4></li>
+<li><h4 id="配置数据库允许其他计算机访问"><a href="#配置数据库允许其他计算机访问" class="headerlink" title="配置数据库允许其他计算机访问"></a>配置数据库允许其他计算机访问</h4></li>
+<li><pre><code class="bash">1. vim /etc/my.conf.d/mariadb.server.conf
+2. bind-address = 127.0.0.1   (本地连接地址）是主机的IP	不是127.0.0.1
+</code></pre>
+</li>
+<li><h4 id="重启服务，开放3306防火墙"><a href="#重启服务，开放3306防火墙" class="headerlink" title="重启服务，开放3306防火墙"></a>重启服务，开放3306防火墙</h4></li>
+</ol>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/3.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/30/ISCSI-Linux/"><img class="prev-cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/21.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ISCSI Linux</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/31/tomcat/"><img class="next-cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/11.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Tomcat</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-05</div><div class="title">CA证书 for Centos8</div></div></a></div><div><a href="/2022/04/09/C8%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" title="C8磁盘管理"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/13.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-09</div><div class="title">C8磁盘管理</div></div></a></div><div><a href="/2022/05/14/Linux%E4%BB%93%E5%BA%93/" title="linux仓库&amp;&amp; RPM"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-14</div><div class="title">linux仓库&amp;&amp; RPM</div></div></a></div><div><a href="/2022/06/13/Keepalived/" title="Keepalived"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-13</div><div class="title">Keepalived</div></div></a></div><div><a href="/2022/05/30/ISCSI-Linux/" title="ISCSI Linux"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/21.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-30</div><div class="title">ISCSI Linux</div></div></a></div><div><a href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/30.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-13</div><div class="title">Linux聚合链路</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">躺平的Halo</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/abpbipg"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my website</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-MySQL-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">配置 MySQL 服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-root-%E5%AF%86%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">配置 root 密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E9%99%86-MySQL-%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="toc-number">3.</span> <span class="toc-text">登陆 MySQL 命令行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C-%E5%AF%BC%E5%85%A5-x2F-%E5%AF%BC%E5%87%BA-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">命令行 导入&#x2F;导出 数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-5-6-%E6%9F%A5%E7%9C%8B-%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">MySQL 5.6 查看 初始密码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tips%EF%BC%9A-%E4%BB%8E-MySQL-5-6-%E8%B5%B7%EF%BC%8C%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81%E4%B8%8D%E5%86%8D%E4%B8%BA%E7%A9%BA"><span class="toc-number">5.1.</span> <span class="toc-text">Tips： 从 MySQL 5.6 起，初始密码不再为空</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.</span> <span class="toc-text">MySQL 常用语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E8%AF%AD%E5%8F%A5"><span class="toc-number">7.</span> <span class="toc-text">MySQL 常用操作语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-%E9%87%8D%E7%BD%AE-root-%E5%AF%86%E7%A0%81"><span class="toc-number">8.</span> <span class="toc-text">MySQL 重置 root 密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">9.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-MySQL-%E7%89%88%E6%9C%AC"><span class="toc-number">9.1.</span> <span class="toc-text">查看 MySQL 版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mysqld-%E7%9B%B8%E5%85%B3"><span class="toc-number">9.2.</span> <span class="toc-text">[mysqld] 相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vim-x2F-etc-x2F-my-cnf-%E4%BF%AE%E6%94%B9-MySQL-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">9.3.</span> <span class="toc-text">vim &#x2F;etc&#x2F;my.cnf 修改 MySQL 配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tips%EF%BC%9A-%E4%BF%AE%E6%94%B9-x2F-etc-x2F-my-cnf-%E5%90%8E%E9%9C%80%E8%A6%81-%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1-%E6%89%8D%E8%83%BD-%E7%94%9F%E6%95%88%E9%85%8D%E7%BD%AE"><span class="toc-number">9.4.</span> <span class="toc-text">* Tips： 修改 &#x2F;etc&#x2F;my.cnf 后需要 重启服务 才能 生效配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF"><span class="toc-number">10.</span> <span class="toc-text">重启</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3"><span class="toc-number">11.</span> <span class="toc-text">端口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3"><span class="toc-number">11.1.</span> <span class="toc-text">防火墙开放端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-x2F-3306-MySQL-%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3"><span class="toc-number">11.2.</span> <span class="toc-text">TCP&#x2F;3306 - MySQL 默认端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="toc-number">12.</span> <span class="toc-text">查看端口号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">13.</span> <span class="toc-text">远程连接数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%83%BD%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%E7%94%A8%E6%88%B7%EF%BC%8C%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E7%9A%84%E6%9D%83%E9%99%90%E6%9D%A5%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE"><span class="toc-number">13.1.</span> <span class="toc-text">创建能远程连接的用户，并且设置用户的权限来访问数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%87%BAjack%E7%94%A8%E6%88%B7%E6%9C%89%E5%AF%B9%E5%85%A8%E9%83%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%9D%83%E9%99%90"><span class="toc-number">13.2.</span> <span class="toc-text">查询出jack用户有对全部计算机连接数据库的权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AE%BF%E9%97%AE"><span class="toc-number">13.3.</span> <span class="toc-text">配置数据库允许其他计算机访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%EF%BC%8C%E5%BC%80%E6%94%BE3306%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">13.4.</span> <span class="toc-text">重启服务，开放3306防火墙</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CA证书 for Centos8"/></a><div class="content"><a class="title" href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8">CA证书 for Centos8</a><time datetime="2022-10-05T11:42:05.986Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/05/NFS/" title="NFS"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/31.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NFS"/></a><div class="content"><a class="title" href="/2022/10/05/NFS/" title="NFS">NFS</a><time datetime="2022-10-05T11:42:05.005Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/13/Keepalived/" title="Keepalived"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Keepalived"/></a><div class="content"><a class="title" href="/2022/06/13/Keepalived/" title="Keepalived">Keepalived</a><time datetime="2022-06-13T12:08:17.000Z" title="发表于 2022-06-13 20:08:17">2022-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/30.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux聚合链路"/></a><div class="content"><a class="title" href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路">Linux聚合链路</a><time datetime="2022-06-13T01:41:06.000Z" title="发表于 2022-06-13 09:41:06">2022-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/03/%E5%90%AC%E6%AD%8C/" title="听歌"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="听歌"/></a><div class="content"><a class="title" href="/2022/06/03/%E5%90%AC%E6%AD%8C/" title="听歌">听歌</a><time datetime="2022-06-03T09:47:40.000Z" title="发表于 2022-06-03 17:47:40">2022-06-03</time></div></div></div></div></div></div></main></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html><footer id="footer" style="background-image: url('https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 躺平的Halo</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer>

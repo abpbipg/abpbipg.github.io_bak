@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>NFS | Home</title><meta name="keywords" content="Linux"><meta name="author" content="躺平的Halo"><meta name="copyright" content="躺平的Halo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="NFS服务NFS服务器可以让PC将网络中的NFS服务器共享的目录挂载到本地端的文件系统中 而在本地端的系统中来看，那个远程主机的目录就好像是自己的一个磁盘分区一样，在使用上相当便利  如上图示：　　当我们在NFS服务器设置好一个共享目录&#x2F;home&#x2F;public后，其他的有权访问NFS服务器的NFS客户端就可以将这个目录挂载到自己文件系统的某个挂载点，这个挂载点可以自己定义，如上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NFS">
+<meta property="og:url" content="http://www.shut.ga/2022/10/05/NFS/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="NFS服务NFS服务器可以让PC将网络中的NFS服务器共享的目录挂载到本地端的文件系统中 而在本地端的系统中来看，那个远程主机的目录就好像是自己的一个磁盘分区一样，在使用上相当便利  如上图示：　　当我们在NFS服务器设置好一个共享目录&#x2F;home&#x2F;public后，其他的有权访问NFS服务器的NFS客户端就可以将这个目录挂载到自己文件系统的某个挂载点，这个挂载点可以自己定义，如上">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/31.webp">
+<meta property="article:published_time" content="2022-10-05T11:42:05.005Z">
+<meta property="article:modified_time" content="2022-10-05T11:42:05.008Z">
+<meta property="article:author" content="躺平的Halo">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/31.webp"><link rel="shortcut icon" href="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp"><link rel="canonical" href="http://www.shut.ga/2022/10/05/NFS/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'NFS',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2022-10-05 19:42:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/31.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Home</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">NFS</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-10-05T11:42:05.005Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="NFS服务"><a href="#NFS服务" class="headerlink" title="NFS服务"></a>NFS服务</h2><p>NFS服务器可以让PC将网络中的NFS服务器<strong>共享的目录</strong>挂载到本<strong>地端的文件系统</strong>中</p>
+<p>而在本地端的系统中来看，那个远程主机的目录就好像是自己的一个<strong>磁盘分区</strong>一样，在使用上相当便利</p>
+<p><img src="/2022/06/02/NFS/1.png" alt="截图"></p>
+<h4 id="如上图示："><a href="#如上图示：" class="headerlink" title="如上图示："></a>如上图示：</h4><p>　　当我们在NFS服务器设置好一个共享目录&#x2F;home&#x2F;public后，其他的有权访问NFS服务器的NFS客户端就可以将这个目录挂载到自己文件系统的某个挂载点，这个挂载点可以自己定义，如上图客户端A与客户端B挂载的目录就不相同。并且挂载好后我们在本地能够看到服务端&#x2F;home&#x2F;public的所有数据。如果服务器端配置的客户端只读，那么客户端就只能够只读。如果配置读写，客户端就能够进行读写。挂载后，NFS客户端查看磁盘信息命令：<code>df –h</code>。</p>
+<p>既然NFS是通过网络来进行服务器端和客户端之间的数据传输，那么两者之间要传输数据就要有想对应的网络端口，NFS服务器到底使用哪个端口来进行数据传输呢？基本上<strong>NFS这个服务器的端口开在2049</strong>,但由于文件系统非常复杂。因此<strong>NFS还有其他的程序去启动额外的端口</strong>，这些额外的用来传输数据的端口是随机选择的，<strong>是小于1024的端口</strong>；既然是随机的那么客户端又是如何知道NFS服务器端到底使用的是哪个端口呢？这时就需要通过远程过程调用（Remote Procedure Call,RPC）协议来实现了！</p>
+<p><strong>NFS的相关文件：</strong></p>
+<ol>
+<li><p>主要配置文件：&#x2F;etc&#x2F;exports<br>   这是 NFS 的<strong>主要配置文件</strong>了。该文件是空白的，有的系统可能不存在这个文件，主要手动建立。NFS的配置一般只在这个文件中配置即可。</p>
+</li>
+<li><p>NFS 文件系统维护指令：&#x2F;usr&#x2F;sbin&#x2F;exportfs<br>   这个是维护 NFS 分享资源的指令，可以利用这个指令重新分享 &#x2F;etc&#x2F;exports 变更的目录资源、将 NFS Server 分享的目录卸除或重新分享。</p>
+</li>
+<li><p>分享资源的登录档：&#x2F;var&#x2F;lib&#x2F;nfs&#x2F;*tab<br>  在 NFS 服务器的登录文件都放置到 <strong>&#x2F;var&#x2F;lib&#x2F;nfs&#x2F; 目录</strong>里面，在该目录下有两个比较重要的登录档，</p>
+</li>
+</ol>
+<p>   ​    一个是 etab ，主要记录了 NFS 所分享出来的目录的完整权限设定值;另一个 xtab 则记录曾经链接到此 NFS 服务器的相关客户端数据。</p>
+<ol start="4">
+<li>客户端查询服务器分享资源的指令：&#x2F;usr&#x2F;sbin&#x2F;showmount<br>   这是另一个重要的 NFS 指令。exportfs 是用在 NFS Server 端，而 showmount 则主要用在 Client 端。</li>
+</ol>
+<p>   ​	showmount 可以用来察看 NFS 分享出来的目录资源。</p>
+<h5 id="配置文件说明："><a href="#配置文件说明：" class="headerlink" title="配置文件说明："></a>配置文件说明：</h5><ol>
+<li>格式： <code>共享目录的路径 允许访问的NFS客户端（共享权限参数）</code></li>
+<li>如上，共享目录为&#x2F;public , 允许访问的客户端为192.168.245.0&#x2F;24网络用户，权限为只读。</li>
+<li><strong>请注意，NFS客户端地址与权限之间没有空格。</strong></li>
+<li>NFS输出保护需要用到kerberos加密（none，sys，krb5，krb5i，krb5p），格式sec&#x3D;XXX</li>
+<li>none：以匿名身份访问，如果要允许写操作，要映射到nfsnobody用户，同时布尔值开关要打开，setsebool nfsd_anon_write 1</li>
+<li>sys：文件的访问是基于标准的文件访问，如果没有指定，默认就是sys， 信任任何发送过来用户名</li>
+<li>krb5：客户端必须提供标识，客户端的表示也必须是krb5，基于域环境的认证</li>
+<li>krb5i：在krb5的基础上做了加密的操作，对用户的密码做了加密，但是传输的数据没有加密</li>
+<li>krb5p：所有的数据都加密</li>
+</ol>
+<h3 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h3><h2 id="x2F-etc-x2F-exports"><a href="#x2F-etc-x2F-exports" class="headerlink" title="&#x2F;etc&#x2F;exports"></a>&#x2F;etc&#x2F;exports</h2><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ro</td>
+<td align="left">制度</td>
+</tr>
+<tr>
+<td align="left">rw</td>
+<td align="left">读写</td>
+</tr>
+<tr>
+<td align="left">root_squash</td>
+<td align="left">当NFS客户端以root管理员访问时，映射为NFS服务器的匿名用户</td>
+</tr>
+<tr>
+<td align="left">no_root_squash</td>
+<td align="left">当NFS客户端以root管理员访问时，映射为NFS服务器的root管理员</td>
+</tr>
+<tr>
+<td align="left">all_squash</td>
+<td align="left">无论NFS客户端使用什么账户访问，均映射为NFS服务器的匿名用户</td>
+</tr>
+<tr>
+<td align="left">sync</td>
+<td align="left">同时将数据同时写入内存与硬盘中，保证不丢失数据</td>
+</tr>
+<tr>
+<td align="left">async</td>
+<td align="left">优先将数据保存到内存，然后再写入硬盘；这样效率高，但可能会丢失数据</td>
+</tr>
+</tbody></table>
+<h5 id="NFS主要有3类选项："><a href="#NFS主要有3类选项：" class="headerlink" title="NFS主要有3类选项："></a>NFS主要有3类选项：</h5><ol>
+<li>访问权限选项<br> 设置输出目录只读：<strong>ro</strong><br> 设置输出目录读写：<strong>rw</strong></li>
+<li>用户映射选项<br> <strong>all_squash</strong>：将远程访问的<strong>所有普通用户</strong>及<strong>所属组</strong>都映射为<strong>匿名用户或用户组</strong>（nfsnobody）；<br> <strong>no_all_squash</strong>：与all_squash取反（默认设置）；<br> <strong>root_squash</strong>：将root用户及所属组都映射为匿名用户或用户组（默认设置）；<br> <strong>no_root_squash</strong>：与rootsquash取反；<br> <strong>anonuid&#x3D;xxx</strong>：将远程访问的所有用户都映射为匿名用户，并指定该用户为本地用户（UID&#x3D;xxx）；<br> <strong>anongid&#x3D;xxx</strong>：将远程访问的所有用户组都映射为匿名用户组账户，并指定该匿名用户组账户为本地用户组账户（GID&#x3D;xxx）；</li>
+<li>其它选项<br> <strong>secure</strong>：限制客户端只能从小于1024的tcp&#x2F;ip端口连接nfs服务器（默认设置）；<br> <strong>insecure</strong>：允许客户端从大于1024的tcp&#x2F;ip端口连接服务器；<br> <strong>sync</strong>：将数据同步写入内存缓冲区与磁盘中，效率低，但可以保证数据的一致性；<br>   <strong>async</strong>：将数据先保存在内存缓冲区中，必要时才写入磁盘；<br>   <strong>wdelay</strong>：检查是否有相关的写操作，如果有则将这些写操作一起执行，这样可以提高效率（默认设置）；<br>   <strong>no_wdelay</strong>：若有写操作则立即执行，应与sync配合使用；<br>   <strong>subtree</strong>：若输出目录是一个子目录，则nfs服务器将检查其父目录的权限(默认设置)；<br>   <strong>no_subtree</strong>：即使输出目录是一个子目录，nfs服务器也不检查其父目录的权限，这样可以提高效率；</li>
+</ol>
+<p><strong>服务器端</strong>使用showmount命令查询NFS的共享状态</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># showmount -e　　　　//默认查看自己共享的服务，前提是要DNS能解析自己，不然容易报错</span><br><span class="line"></span><br><span class="line"># showmount -a　　　　//显示已经与客户端连接上的目录信息</span><br></pre></td></tr></table></figure>
+
+<p><strong>客户端</strong>使用showmount命令查询NFS的共享状态</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># showmount -e NFS服务器IP</span><br></pre></td></tr></table></figure>
+
+<h5 id="如果我们在启动了NFS之后又修改了-x2F-etc-x2F-exports，是不是还要重新启动nfs呢？"><a href="#如果我们在启动了NFS之后又修改了-x2F-etc-x2F-exports，是不是还要重新启动nfs呢？" class="headerlink" title="如果我们在启动了NFS之后又修改了&#x2F;etc&#x2F;exports，是不是还要重新启动nfs呢？"></a>如果我们在启动了NFS之后又修改了&#x2F;etc&#x2F;exports，是不是还要重新启动nfs呢？</h5><p>这个时候我们就可以用<strong>exportfs 命令</strong>来使改动立刻生效，该命令格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># exportfs [-aruv]</span><br><span class="line">　　-a 全部挂载或卸载 /etc/exports中的内容</span><br><span class="line">　　-r 重新读取/etc/exports 中的信息 ，并同步更新/etc/exports、/var/lib/nfs/xtab</span><br><span class="line">　　-u 卸载单一目录（和-a一起使用为卸载所有/etc/exports文件中的目录）</span><br><span class="line">　　-v 在export的时候，将详细的信息输出到屏幕上。</span><br><span class="line"></span><br><span class="line">具体例子：</span><br><span class="line">　　# exportfs -au 卸载所有共享目录</span><br><span class="line">　　# exportfs -rv 重新共享所有目录并输出详细信息</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/31.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/06/13/Keepalived/"><img class="prev-cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Keepalived</div></div></a></div><div class="next-post pull-right"><a href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/"><img class="next-cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CA证书 for Centos8</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-05</div><div class="title">CA证书 for Centos8</div></div></a></div><div><a href="/2022/04/09/C8%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" title="C8磁盘管理"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/13.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-09</div><div class="title">C8磁盘管理</div></div></a></div><div><a href="/2022/05/14/Linux%E4%BB%93%E5%BA%93/" title="linux仓库&amp;&amp; RPM"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-14</div><div class="title">linux仓库&amp;&amp; RPM</div></div></a></div><div><a href="/2022/06/13/Keepalived/" title="Keepalived"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-13</div><div class="title">Keepalived</div></div></a></div><div><a href="/2022/05/30/ISCSI-Linux/" title="ISCSI Linux"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/21.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-30</div><div class="title">ISCSI Linux</div></div></a></div><div><a href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路"><img class="cover" src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/30.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-13</div><div class="title">Linux聚合链路</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/1.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">躺平的Halo</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/abpbipg"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my website</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NFS%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">NFS服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%B8%8A%E5%9B%BE%E7%A4%BA%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">如上图示：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">配置文件说明：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">配置：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x2F-etc-x2F-exports"><span class="toc-number">2.</span> <span class="toc-text">&#x2F;etc&#x2F;exports</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#NFS%E4%B8%BB%E8%A6%81%E6%9C%893%E7%B1%BB%E9%80%89%E9%A1%B9%EF%BC%9A"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">NFS主要有3类选项：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%88%91%E4%BB%AC%E5%9C%A8%E5%90%AF%E5%8A%A8%E4%BA%86NFS%E4%B9%8B%E5%90%8E%E5%8F%88%E4%BF%AE%E6%94%B9%E4%BA%86-x2F-etc-x2F-exports%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E5%90%AF%E5%8A%A8nfs%E5%91%A2%EF%BC%9F"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">如果我们在启动了NFS之后又修改了&#x2F;etc&#x2F;exports，是不是还要重新启动nfs呢？</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/16.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CA证书 for Centos8"/></a><div class="content"><a class="title" href="/2022/10/05/CA%E8%AF%81%E4%B9%A6-for-Centos8/" title="CA证书 for Centos8">CA证书 for Centos8</a><time datetime="2022-10-05T11:42:05.986Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/05/NFS/" title="NFS"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/31.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NFS"/></a><div class="content"><a class="title" href="/2022/10/05/NFS/" title="NFS">NFS</a><time datetime="2022-10-05T11:42:05.005Z" title="发表于 2022-10-05 19:42:05">2022-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/13/Keepalived/" title="Keepalived"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/8.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Keepalived"/></a><div class="content"><a class="title" href="/2022/06/13/Keepalived/" title="Keepalived">Keepalived</a><time datetime="2022-06-13T12:08:17.000Z" title="发表于 2022-06-13 20:08:17">2022-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/30.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux聚合链路"/></a><div class="content"><a class="title" href="/2022/06/13/Linux%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" title="Linux聚合链路">Linux聚合链路</a><time datetime="2022-06-13T01:41:06.000Z" title="发表于 2022-06-13 09:41:06">2022-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/03/%E5%90%AC%E6%AD%8C/" title="听歌"><img src="https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="听歌"/></a><div class="content"><a class="title" href="/2022/06/03/%E5%90%AC%E6%AD%8C/" title="听歌">听歌</a><time datetime="2022-06-03T09:47:40.000Z" title="发表于 2022-06-03 17:47:40">2022-06-03</time></div></div></div></div></div></div></main></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html><footer id="footer" style="background-image: url('https://jsd.eagleyao.com/gh/abpbipg/image-hosting@master/6.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 躺平的Halo</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer>
